@@ -1,0 +1,51 @@
+{% extends "skin25/base.html" %}
+{% load staticfiles %}
+{% block style %}
+    <link href="{% static 'skin25/css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'skin25/css/about.css' %}" rel="stylesheet">
+    <link href="{% static 'skin25/css/media.css' %}" rel="stylesheet">
+{% endblock %}
+{% block left %}
+    <article>
+        <h3 class="about_h">您现在的位置是：<a href="/">首页</a>><a href="#">关于我</a></h3>
+        <div class="about">
+            <h2>Just about me</h2>
+            <ul>
+                <p>我就是我，不一样的烟火；有时自己看了都会发火。</p>
+                <p>过去的事情已无法改变，所以不要让自己明天的自己怀有同意的心情。</p>
+                {% comment %}<p>个人的CSDN博客地址<a class="blog_link" href="http://blog.csdn.net/daelly">http://blog.csdn.net/daelly</a></p>{% endcomment %}
+            </ul>
+            <h2>About my blog</h2>
+            <ul class="blog_a">
+                <p>域 名：www.daelly.com 创建于2017年03月1日
+                    <a href="http://www.net.cn/domain/" class="blog_link" target="_blank">注册域名</a>
+                    <a class="blog_link" href="#" target="_blank">邀你点评</a></p>
+                <p>服务器：阿里云服务器
+                    <a href="#" class="blog_link" target="_blank">购买空间</a>
+                    <a href="#" target="_blank" class="blog_link">参考我的空间配置</a>
+                </p>
+                <p>程 序：
+                    <a class="blog_link" href="https://github.com/daelly/sblog">django</a>
+                    参考模板：<a class="blog_link" href="http://www.yangqq.com/download/div/">杨青个人博客模板</a>
+                </p>
+                <p>个人邮箱：www.daelly@live.com</p>
+            </ul>
+        </div>
+    </article>
+{% endblock %}
+{% block right %}
+    <aside>
+        <div class="avatar"><a href="{% url 'msblog:about' %}"><span>关于李清洋</span></a></div>
+        <div class="topspaceinfo">
+            <h1>执子之手，与子偕老</h1>
+            <p>于千万人之中，我遇见了我所遇见的人....</p>
+        </div>
+        <div class="about_c">
+            <p>网名：Daelly | 李清洋</p>
+            <p>职业：Java开发</p>
+            <p>籍贯：广西-浦北</p>
+            {% comment %}<p>电话：15902096411</p>{% endcomment %}
+            <p>邮箱：daelly@live.com</p>
+        </div>
+    </aside>
+{% endblock %}

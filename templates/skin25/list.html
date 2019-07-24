@@ -1,0 +1,57 @@
+{% extends "skin25/base.html" %}
+{% load staticfiles %}
+{% block title %}个人博客|{{ category.category_name }}{% endblock %}
+{% block keywords %}
+    <meta name="keywords" content="Java,{{ category.category_name }},{{ category.category_slug }}"/>
+{% endblock %}
+{% block style %}
+    <link href="{% static 'skin25/css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'skin25/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'skin25/css/index.css' %}" rel="stylesheet">
+    <link href="{% static 'skin25/css/media.css' %}" rel="stylesheet">
+{% endblock %}
+{% block left %}
+    <article>
+        <h2 class="about_h">您现在的位置是：<a href="{% url 'msblog:home' %}">首页</a>><a
+                href="{% url 'msblog:category' category.category_slug %}">{{ category.category_name }}</a></h2>
+        <div class="bloglist">
+            {% for blog in blogs %}
+                <div class="newblog">
+                    <ul>
+                        <h3><a href="{% url 'msblog:detail' blog.id %}">{{ blog.caption }}</a></h3>
+                        <div class="autor">
+                            <span>作者：{{ blog.author.pen_name }}</span>
+                            <span>分类：[<a
+                                    href="{% url 'msblog:category' blog.category.category_slug %}">{{ blog.category.category_name }}</a>]</span>
+                            <span>浏览（<a href="#">{{ blog.visits }}</a>）</span>
+                            <span>评论（<a href="#"><span class="ds-thread-count" data-thread-key="{{ blog.id }}"
+                                                       data-count-type="comments">0</span></a>）</span>
+                        </div>
+                        <p>
+                            {{ blog.abstract|cstrip:200 }}
+                            <a href="{% url 'msblog:detail' blog.id %}" class="readmore">全文</a>
+                        </p>
+                    </ul>
+                    <figure><img src="{{ blog.cover_image.url }}"></figure>
+                    <div class="dateview">{{ blog.publish_time|date:'Y-m-d' }}</div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="page">
+            <!-- <a title="Total record"><b>113</b></a> -->
+            {% if blogs.has_previous %}
+                <a href="{% url 'msblog:category' category.category_slug %}?page={{ blogs.previous_page_number }}">&lt;</a>
+            {% endif %}
+            {% for p in blogs.paginator.page_range %}
+                {% if p == blogs.number %}
+                    <b>{{ p }}</b>
+                {% else %}
+                    <a href="{% url 'msblog:category' category.category_slug %}?page={{ p }}">{{ p }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if blogs.has_next %}
+                <a href="{% url 'msblog:category' category.category_slug %}?page={{ blogs.next_page_number }}">&gt;</a>
+            {% endif %}
+        </div>
+    </article>
+{% endblock %}

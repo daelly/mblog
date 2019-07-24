@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>
+		{% block title %}个人博客|主页{% endblock %}
+	</title>
+    {% block keywords %}		
+	    <meta name="keywords" content="个人博客" />
+	{% endblock %}
+	{% block description %}		
+	    <meta name="description" content="这是一个个人的技术博客，主要记录工作中碰到的问题和解决方法。另外对自己的个人感情生活的一些体悟也有记录。" />
+	{% endblock %}
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	{% block style %}
+		<!-- stylesheet -->   
+    {% endblock %}
+    <!--[if lt IE 9]>
+    <script src="js/modernizr.js"></script>
+    <![endif]-->
+</head>
+<body>
+	{% block body %}
+		<!-- body -->
+	{% endblock %}
+</body>
+{% block script %}
+	<!-- script -->   
+{% endblock %}
+{% block extendscript %}
+    <!-- other static resources -->
+{% endblock %}
+</html>

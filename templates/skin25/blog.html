@@ -1,0 +1,127 @@
+{% extends "skin25/base.html" %}
+{% load staticfiles %}
+{% block title %}个人博客|{{ article.caption }}{% endblock %}
+{% block keywords %}
+    <meta name="keywords" content="{% for tagname in article.tagnames %}{% if not forloop.first %},{% endif %}{{ tagname }}{% empty %}{{ article.category.category_name }}{% endfor %}" />
+{% endblock %}
+{% block description %}
+    <meta name="description" content="{{ article.abstract|cstrip:200 }}"/>
+{% endblock %}
+{% block style %}
+    <link href="{% static 'skin25/css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'skin25/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'skin25/css/media.css' %}" rel="stylesheet">
+{% endblock %}
+{% block left %}
+    <article>
+        <h2 class="about_h">您现在的位置是：<a href="{% url 'msblog:home' %}">首页</a>><a
+                href="{% url 'msblog:category' article.category.category_slug %}">{{ article.category.category_name }}</a>><a
+                href="#">{{ article.caption }}</a></h2>
+        <div class="index_about">
+            <h2 class="c_titile">{{ article.caption }}</h2>
+            <p class="box_c">
+                <span class="d_time">发布时间：{{ article.update_time|date:'Y-m-d' }}</span>
+                <span>编辑：{{ article.author.pen_name }}</span>
+                <span>浏览（{{ article.visits }}）</span>
+                <span>评论（<span class="ds-thread-count" data-thread-key="{{ article.id }}"
+                               data-count-type="comments">0</span>）</span>
+            </p>
+            <ul class="infos">
+                {% autoescape off %}
+                    {{ article.content }}
+                {% endautoescape %}
+            </ul>
+            <div class="keybq">
+                <p><span class="label-title">关键字词</span>：
+                    {% for tagname in article.tagnames %}
+                        <span class="label label-default">{{ tagname }}</span>
+                    {% empty %}
+                        无
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="nextinfo">
+                {% if article.prev %}
+                    <p>上一篇：<a href="{% url 'msblog:detail' article.prev.id %}">{{ article.prev.caption }}</a></p>
+                {% endif %}
+                {% if article.next %}
+                    <p>下一篇：<a href="{% url 'msblog:detail' article.next.id %}">{{ article.next.caption }}</a></p>
+                {% endif %}
+            </div>
+            <div class="otherlink">
+                <h2>相关文章</h2>
+                <ul>
+                    {% for related_blog in article.related %}
+                        <li><a href="{% url 'msblog:detail' related_blog.id %}"
+                               title="{{ related_blog.caption }}">{{ related_blog.caption }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div id="SOHUCS" sid="{{ article.id }}"></div>
+            <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
+            <script type="text/javascript">
+                window.changyan.api.config({
+                    appid: 'cyubSs8w4',
+                    conf: '1119a43ee8fbad2785f074ab29dc116f'
+                });
+            </script>
+        </div>
+    </article>
+{% endblock %}
+{% block right %}
+    <aside>
+        <div class="rnav">
+            <li class="rnav1 "><a href="{% url 'msblog:category' 'diary' %}">日记</a></li>
+            <li class="rnav2 "><a href="{% url 'msblog:album' %}">欣赏</a></li>
+            <li class="rnav3 "><a href="{% url 'msblog:category' 'tech' %}">程序人生</a></li>
+            {% comment %}<li class="rnav4 "><a href="{% url 'msblog:shuo' %}">经典语录</a></li>{% endcomment %}
+        </div>
+        <div class="ph_news">
+            <h2>
+                <p>点击排行</p>
+            </h2>
+            <ul class="ph_n">
+                {% for blog in visits %}
+                    <li><a href="{% url 'msblog:detail' blog.id %}">{{ blog.caption }}</a></li>
+                {% endfor %}
+            </ul>
+            <h2>
+                <p>栏目推荐</p>
+            </h2>
+            <ul>
+                {% for blog in suggestion %}
+                    <li><a href="{% url 'msblog:detail' blog.id %}">{{ blog.caption }}</a></li>
+                {% endfor %}
+            </ul>
+            {% comment %}<h2>
+                <p>最新评论</p>
+            </h2>
+            <ul class="ds-recent-comments pl_n" data-num-items="5" data-thread-key="{{ article.id }}"></ul>
+            <h2>
+                <p>最近访客</p>
+                <ul class="ds-recent-visitors" data-num-items="24" data-thread-key="{{ article.id }}">
+
+                </ul>
+            </h2>{% endcomment %}
+        </div>
+        <div class="copyright">
+            <ul>
+                <p> Power by <a href="/">Daelly</a></p>
+                <p>粤IPC备17001317号</p>
+                </p>
+            </ul>
+        </div>
+    </aside>
+{% endblock %}
+{% block extendscript %}
+    <script src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=413192"></script>
+    <link rel="stylesheet" href="http://bdimg.share.baidu.com/static/api/css/share_style1_32.css">
+    <!-- 代码高亮  -->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/monokai_sublime.css' %}"/>
+    <script type="text/javascript"
+            src="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js' %}"></script>
+    <script type="text/javascript">
+        hljs.initHighlightingOnLoad();
+    </script>
+{% endblock %}

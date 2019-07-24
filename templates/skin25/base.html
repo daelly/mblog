@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load cache %}
+{% block title %}个人博客|主页{% endblock %}
+{% block keywords %}
+    <meta name="keywords" content="个人博客" />
+{% endblock %}
+{% block description %}
+    <meta name="description" content="这是一个个人的技术博客，主要记录工作中碰到的问题和解决方法。另外对自己的个人感情生活的一些体悟也有记录。" />
+{% endblock %}
+{% block style %}
+    <link href="{% static 'skin25/css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'skin25/css/index.css' %}" rel="stylesheet">
+    <link href="{% static 'skin25/css/media.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="ibody">
+        {% block header %}
+            <header>
+                <h1>如影随形</h1>
+                <h2>影子是一个会撒谎的精灵，它在虚空中流浪和等待被发现之间;在存在与不存在之间....</h2>
+                <div class="logo"><a href="/"></a></div>
+                <nav id="topnav">
+                    <a href="{% url 'msblog:home' %}">首页</a>
+                    <a href="{% url 'msblog:about' %}">关于我</a>
+                    <a href="{% url 'msblog:category' 'diary' %}">慢生活</a>
+                    <a href="{% url 'msblog:category' 'tech' %}">程序员</a>
+                    <a href="{% url 'msblog:album' %}">照片墙</a>
+                </nav>
+            </header>
+        {% endblock %}
+        {% block content %}
+            {% block left %}
+                <!-- article -->
+            {% endblock %}
+            <!-- sperator -->
+            {% block right %}
+                {% cache 86400 right %}
+                    <aside>
+                        <div class="avatar"><a href="{% url 'msblog:about' %}"><span>关于李清洋</span></a></div>
+                        <div class="topspaceinfo">
+                            <h1>执子之手，与子偕老</h1>
+                            <p>于千万人之中，我遇见了我所遇见的人....</p>
+                        </div>
+                        <div class="about_c">
+                            <p>网名：Daelly | 李清洋</p>
+                            <p>职业：Java开发 </p>
+                            <p>籍贯：广西-浦北</p>
+                            {% comment %}<p>电话：15902096411</p>{% endcomment %}
+                            <p>邮箱：daelly@live.com</p>
+                        </div>
+                        <div class="tj_news">
+                            <h2>
+                                <p class="tj_t1">最新文章</p>
+                            </h2>
+                            <ul>
+                                {% for blog in lastest %}
+                                    <li><a href="{% url 'msblog:detail' blog.id %}">{{ blog.caption }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            <h2>
+                                <p class="tj_t2">推荐文章</p>
+                            </h2>
+                            <ul>
+                                {% for blog in suggestion %}
+                                    <li><a href="{% url 'msblog:detail' blog.id %}">{{ blog.caption }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="links">
+                            <h2>
+                                <p>友情链接</p>
+                            </h2>
+                            <ul>
+                                <li><a href="http://blog.csdn.net/daelly">李清洋CSDN博客</a></li>
+                                <li><a href="/">3DST技术社区</a></li>
+                            </ul>
+                        </div>
+                        <div class="copyright">
+                            <ul>
+                                <p> Power by <a href="/">Daelly</a></p>
+                                <p>粤IPC备17001317号</p>
+                                </p>
+                            </ul>
+                        </div>
+                    </aside>
+                {% endcache %}
+            {% endblock %}
+        {% endblock %}
+        <div class="clear"></div>
+        <!-- 清除浮动 -->
+    </div>
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="{% static 'skin25/js/modernizr.js' %}"></script>
+    <script type="text/javascript" src="{% static 'skin25/js/silder.js' %}"></script>
+{% endblock %}

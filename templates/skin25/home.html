@@ -1,0 +1,39 @@
+{% extends "skin25/base.html" %}
+{% load staticfiles %}
+{% block keywords %}
+    <meta name="keywords" content="个人博客,程序员,慢生活"/>
+{% endblock %}
+{% block left %}
+    <article>
+        <div class="banner">
+            <ul class="texts">
+                <p>The best life is use of willing attitude, a happy-go-lucky life. </p>
+                <p>最好的生活是用心甘情愿的态度，过随遇而安的生活。</p>
+            </ul>
+        </div>
+        <div class="bloglist">
+            <h2>
+                <p><span>推荐</span>文章</p>
+            </h2>
+            {% for blog in blogs %}
+                <div class="blogs">
+                    <h3><a href="{% url 'msblog:detail' blog.id %}">{{ blog.caption }}</a></h3>
+                    <figure><img src="{{ blog.cover_image.url }}"></figure>
+                    <ul>
+                        <p>{{ blog.abstract|cstrip:200 }}</p>
+                        <a href="{% url 'msblog:detail' blog.id %}" target="_blank" class="readmore">阅读全文&gt;&gt;</a>
+                    </ul>
+                    <p class="autor">
+                        <span>作者：{{ blog.author.pen_name }}</span>
+                        <span>分类：【<a
+                                href="{% url 'msblog:category' blog.category.category_slug %}">{{ blog.category.category_name }}</a>】</span>
+                        <span>浏览（<a href="/">{{ blog.visits }}</a>）</span>
+                        <span>评论（<a href="/"><span class="ds-thread-count" data-thread-key="{{ blog.id }}"
+                                                   data-count-type="comments">0</span></a>）</span>
+                    </p>
+                    <div class="dateview">{{ blog.publish_time|date:'Y-m-d' }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </article>
+{% endblock %}

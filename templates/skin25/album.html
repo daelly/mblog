@@ -1,0 +1,35 @@
+{% extends "skin25/base.html" %}
+{% load staticfiles %}
+{% block style %}
+    <link href="{% static 'skin25/css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'skin25/css/index.css' %}" rel="stylesheet">
+    <link href="{% static 'skin25/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'skin25/css/media.css' %}" rel="stylesheet">
+{% endblock %}
+{% block left %}
+    <article>
+        <h2 class="about_h">您现在的位置是：<a href="{% url 'msblog:home' %}">首页</a>><a href="{% url 'msblog:album' %}">模板分享</a>
+        </h2>
+        <div class="template">
+            <h3>
+                <p><span>收藏图片</span></p>
+                {% comment %} <a href="#" class="more">更多>></a>{% endcomment %}</h3>
+            <ul>
+                {% for photo in photos %}
+                    <li><a href="#" target="_blank"><img src="{{ photo.photo.url }}"></a><span>{{ photo.remark }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% comment %}        <div class="page">
+        	<a title="Total record"><b>113</b></a>
+        	<b>1</b>
+        	<a href="#">2</a>
+        	<a href="#">3</a>
+        	<a href="#">4</a>
+        	<a href="#">5</a>
+        	<a href="#">&gt;</a>
+        	<a href="#">&gt;&gt;</a>
+        </div>{% endcomment %}
+    </article>
+{% endblock %}
