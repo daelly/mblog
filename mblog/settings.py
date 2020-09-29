@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'mblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangodb',
-        'USER': 'djanger',
-        'PASSWORD': '123456',
-        'HOST': '192.168.6.129',
+        'NAME': 'djangodbtest',
+        'USER': 'xxx',
+        'PASSWORD': 'xxx',
+        'HOST': 'xxx',
         'PORT': '3306'
     }
 }

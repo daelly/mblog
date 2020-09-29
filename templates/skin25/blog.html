@@ -1,5 +1,5 @@
 {% extends "skin25/base.html" %}
-{% load staticfiles %}
+{% load static %}
 {% block title %}个人博客|{{ article.caption }}{% endblock %}
 {% block keywords %}
     <meta name="keywords" content="{% for tagname in article.tagnames %}{% if not forloop.first %},{% endif %}{{ tagname }}{% empty %}{{ article.category.category_name }}{% endfor %}" />
