@@ -106,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'zh-Hans'
+LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'UTC'
 
@@ -128,7 +128,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # ckeditor config
-CKEDITOR_UPLOAD_PATH = "/uploads/"
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CKEDITOR_IMAGE_BACKEND = "pillow"
 
@@ -155,7 +155,6 @@ CKEDITOR_CONFIGS = {
         ),
         'height': 500,
         'width': 950,
-        'language': 'zh-cn',
         'skin': 'moono-lisa',
         'extraPlugins': '.'.join([
             'codesnippet'
