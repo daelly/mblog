@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from mblog import properties
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'g374^458s_onn)1(m5wd!&h6wyjw13pt1l7$1-s52l+s(64%81'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['daelly.com']
 
 # Application definition
 
@@ -77,11 +78,11 @@ WSGI_APPLICATION = 'mblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangodb',
-        'USER': 'djanger',
-        'PASSWORD': '123456',
-        'HOST': '192.168.6.129',
-        'PORT': '3306'
+        'NAME': properties.MYSQL_DBNAME,
+        'USER': properties.MYSQL_USER,
+        'PASSWORD': properties.MYSQL_PASSWORD,
+        'HOST': properties.MYSQL_HOST,
+        'PORT': properties.MYSQL_PORT
     }
 }
 
@@ -106,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'zh-Hans'
+LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'UTC'
 
@@ -128,7 +129,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # ckeditor config
-CKEDITOR_UPLOAD_PATH = "/uploads/"
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CKEDITOR_IMAGE_BACKEND = "pillow"
 
@@ -155,7 +156,6 @@ CKEDITOR_CONFIGS = {
         ),
         'height': 500,
         'width': 950,
-        'language': 'zh-cn',
         'skin': 'moono-lisa',
         'extraPlugins': '.'.join([
             'codesnippet'
