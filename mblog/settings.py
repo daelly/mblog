@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from mblog import properties
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'g374^458s_onn)1(m5wd!&h6wyjw13pt1l7$1-s52l+s(64%81'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['daelly.com']
 
 # Application definition
 
@@ -77,11 +78,11 @@ WSGI_APPLICATION = 'mblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangodbtest',
-        'USER': 'xxx',
-        'PASSWORD': 'xxx',
-        'HOST': 'xxx',
-        'PORT': '3306'
+        'NAME': properties.MYSQL_DBNAME,
+        'USER': properties.MYSQL_USER,
+        'PASSWORD': properties.MYSQL_PASSWORD,
+        'HOST': properties.MYSQL_HOST,
+        'PORT': properties.MYSQL_PORT
     }
 }
 

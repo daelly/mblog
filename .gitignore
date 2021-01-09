@@ -1,3 +1,4 @@
 media
 venv
 .idea
+mblog/properties.py
