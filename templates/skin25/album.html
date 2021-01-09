@@ -1,5 +1,5 @@
 {% extends "skin25/base.html" %}
-{% load staticfiles %}
+{% load static %}
 {% block style %}
     <link href="{% static 'skin25/css/base.css' %}" rel="stylesheet">
     <link href="{% static 'skin25/css/index.css' %}" rel="stylesheet">
@@ -8,7 +8,7 @@
 {% endblock %}
 {% block left %}
     <article>
-        <h2 class="about_h">您现在的位置是：<a href="{% url 'msblog:home' %}">首页</a>><a href="{% url 'msblog:album' %}">模板分享</a>
+        <h2 class="about_h">您现在的位置是：<a href="{% url 'msblog:home' %}">首页</a>><a href="{% url 'msblog:album' %}">收藏图片</a>
         </h2>
         <div class="template">
             <h3>
